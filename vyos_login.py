@@ -60,6 +60,7 @@ def inventory():
     1. Uptime
     2. Interface
     3. MAC Address
+    4. SSH
     '''
     print(options)
 
