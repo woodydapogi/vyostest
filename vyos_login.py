@@ -69,6 +69,7 @@ def inventory():
     uptime= main_conn.vyos_conn.send_command("show system uptime")
     interfaces= main_conn.vyos_conn.send_command("show interfaces | match eth")
     mac_addr= main_conn.vyos_conn.send_command("show config | match hw-id")
+    ssh= main_conn.vyos_conn.send_command("show config | match listen-address")
     try:
         while True:
             if option == 1:
@@ -84,8 +85,9 @@ def inventory():
                 inventory()
             
             elif option == 4:
-                print("Config mode.")
-                housekeeping()
+                print(f'SH Listen Address --- {ssh}')
+                inventory()
+
             else:
                 print("Bye!")
                 sys.exit()
