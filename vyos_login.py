@@ -118,7 +118,7 @@ def housekeeping():
     if option == "e" and option != "E":
         print("Bye!")
         sys.exit()
-        
+
     else:
         print("Nah.")
 
