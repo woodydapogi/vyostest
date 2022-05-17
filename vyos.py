@@ -11,14 +11,14 @@ vyos1= {
     "device_type": "vyos",
     "host": "192.168.1.15",
     "username": "vyos",
-    "password": "$75C.woodie"
+    "password": "vyos"
 }
 
 vyos2= {
     "device_type": "vyos",
     "host": "192.168.1.16",
     "username": "vyos",
-    "password": "$75C.woodie"
+    "password": "vyos"
 }
 
 with open("vyos_details.json", "r") as login_details:
