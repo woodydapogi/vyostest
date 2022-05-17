@@ -21,8 +21,21 @@ vyos2= {
     "password": "vyos"
 }
 
+#Check output using ping.py module.
+for ip_addr in range(16,17):
+    octet= "192.168.1."
+    ip= str(ip_addr)
+    ping.ping_conn(f'{octet}{ip}')
+
 with open("vyos_details.json", "r") as login_details:
     login= json.load(login_details)
+
+try:
+    main_conn= ConnectHandler(**login)
+    print(f"Connection Established")
+
+except(NetMikoAuthenticationException, NetMikoTimeoutException) as net_err:
+    print(net_err)
 
 class Network:
     def __init__(self, mac_id):
@@ -30,14 +43,13 @@ class Network:
     
     def mac_addr(self):
         '''Output mac address from the vyos router'''
-        
-#Check output using ping.py module.
-for ip_addr in range(15, 17):
-    octet= "192.168.1."
-    ip= str(ip_addr)
-    ping.ping_conn(f'{octet}{ip}')
+        self.mac_id = main_conn.send_command("show config | match hw-id")
+        return self.mac_id.lstrip()
 
+mac = Network(main_conn)
+print(mac.mac_addr())
 
+'''
 dev_list= [vyos1, vyos2]
 for device in dev_list:
     try:
@@ -46,3 +58,4 @@ for device in dev_list:
 
     except(NetMikoAuthenticationException, NetMikoTimeoutException) as net_err:
         print(net_err)
+'''
