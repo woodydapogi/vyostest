@@ -1,6 +1,0 @@
-{
-    "device_type": "vyos",
-    "host": "192.168.1.16",
-    "username": "vyos",
-    "password": "$75C.woodie"
-}
