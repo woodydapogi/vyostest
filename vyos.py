@@ -3,9 +3,13 @@
 #Env: Vbox
 #Platform: Windows
 
-from netmiko import *
-import ping
-import json
+try:
+    from netmiko import *
+    import ping #from ping.py module.
+    import json
+
+except ImportError as i_err:
+    print(i_err)
 
 vyos1= {
     "device_type": "vyos",
@@ -30,13 +34,15 @@ for ip_addr in range(16,17):
 with open("vyos_details.json", "r") as login_details:
     login= json.load(login_details)
 
+#Establishing connection to the vyos router/s.
 try:
-    main_conn= ConnectHandler(**login)
+    main_conn= ConnectHandler(**login) #from netmiko library.
     print(f"Connection Established")
 
 except(NetMikoAuthenticationException, NetMikoTimeoutException) as net_err:
     print(net_err)
 
+#Basic object creation for specific purpose.
 class Network:
     def __init__(self, vyos):
         self.vyos = vyos
@@ -54,14 +60,3 @@ class Network:
 vyos1 = Network(main_conn)
 print(vyos1.mac_addr())
 print(vyos1.ssh())
-
-'''
-dev_list= [vyos1, vyos2]
-for device in dev_list:
-    try:
-        main_conn= ConnectHandler(**device)
-        print(f"{octet}{ip} ---> Connection Established")
-
-    except(NetMikoAuthenticationException, NetMikoTimeoutException) as net_err:
-        print(net_err)
-'''
