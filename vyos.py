@@ -1,3 +1,8 @@
+#Test network automation using vyos router.
+#Version: 1.0
+#Env: Vbox
+#Platform: Windows
+
 from netmiko import *
 import ping
 import json
@@ -13,7 +18,7 @@ class Network:
         '''Output mac address from the vyos router'''
         main_conn= ConnectHandler(**login)
 
-
+#Check output using ping.py module.
 for ip_addr in range(15, 17):
     octet= "192.168.1."
     ip= str(ip_addr)
