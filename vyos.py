@@ -50,12 +50,19 @@ class Network:
     def mac_addr(self):
         '''Output mac address from the vyos router'''
         self.vyos = main_conn.send_command("show config | match hw-id")
-        return self.vyos.lstrip()
+        return f'\nMAC ADDR: {self.vyos.lstrip()}'
     
     def ssh(self):
-        '''Output listen address'''
+        '''Output ssh listen address'''
         self.vyos= main_conn.send_command("show config | match listen-address")
-        return self.vyos.lstrip()
+        return f'\nSSH: {self.vyos.lstrip()}'
+    
+    def ospf_config(self):
+        '''OSPF configuration'''
+        ospf_conf="set protocol area 20 network 192.168.10.0/24"
+        self.vyos= main_conn.send_config_set(ospf_conf, exit_config_mode=False)
+
+        self.vyos.main_conn.commit()
 
 vyos1 = Network(main_conn)
 print(vyos1.mac_addr())
