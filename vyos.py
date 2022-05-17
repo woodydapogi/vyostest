@@ -59,11 +59,19 @@ class Network:
     
     def ospf_config(self):
         '''OSPF configuration'''
+        show_ospf="show config | match ospf"
         ospf_conf="set protocol area 20 network 192.168.10.0/24"
-        self.vyos= main_conn.send_config_set(ospf_conf, exit_config_mode=False)
 
-        self.vyos.main_conn.commit()
+        self.vyos= main_conn.send_command(show_ospf)
+
+        if self.vyos == "":
+            return "OSPF not set."
+
+        #self.vyos= main_conn.send_config_set(ospf_conf, exit_config_mode=False)
+
+        #self.vyos.main_conn.commit()
 
 vyos1 = Network(main_conn)
 print(vyos1.mac_addr())
 print(vyos1.ssh())
+print(vyos1.ospf_config())
