@@ -101,26 +101,7 @@ def inventory():
 
 ### PUSHING BASIC CONFIGURATIONS TO THE NEW ROUTER. ###
 def housekeeping():
-    ospf= "set protocols ospf area 10 network 192.168.1.0/24"
-    options='''
-    a. Add OSPF Area Number and Network.
-    '''
-
-    option= input("Choose Options (press e and hit return to exit): ")
-
-    if option == "a" or option == "A":
-        ospf_config= main_conn.vyos_conn.send_config_set(ospf, exit_config_mode=False)
-        print(ospf_config)
-
-        ospf_config.main_conn.vyos_conn.commit()
-        print(ospf_config)
-    
-    if option == "e" and option != "E":
-        print("Bye!")
-        sys.exit()
-
-    else:
-        print("Nah.")
+   pass
 
 
 ### SAVE CONFIG AND SAVE TO FILE. ###
