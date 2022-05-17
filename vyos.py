@@ -1,4 +1,4 @@
-#Test network automation using vyos router.
+#Purpose: Test automation for our network.
 #Version: 1.0
 #Env: Vbox
 #Platform: Windows
