@@ -38,16 +38,22 @@ except(NetMikoAuthenticationException, NetMikoTimeoutException) as net_err:
     print(net_err)
 
 class Network:
-    def __init__(self, mac_id):
-        self.mac_id = mac_id
+    def __init__(self, vyos):
+        self.vyos = vyos
     
     def mac_addr(self):
         '''Output mac address from the vyos router'''
-        self.mac_id = main_conn.send_command("show config | match hw-id")
-        return self.mac_id.lstrip()
+        self.vyos = main_conn.send_command("show config | match hw-id")
+        return self.vyos.lstrip()
+    
+    def ssh(self):
+        '''Output listen address'''
+        self.vyos= main_conn.send_command("show config | match listen-address")
+        return self.vyos.lstrip()
 
-mac = Network(main_conn)
-print(mac.mac_addr())
+vyos1 = Network(main_conn)
+print(vyos1.mac_addr())
+print(vyos1.ssh())
 
 '''
 dev_list= [vyos1, vyos2]
