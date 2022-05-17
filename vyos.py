@@ -12,20 +12,6 @@ try:
 except ImportError as i_err:
     print(i_err)
 
-vyos1= {
-    "device_type": "vyos",
-    "host": "192.168.1.15",
-    "username": "vyos",
-    "password": "vyos"
-}
-
-vyos2= {
-    "device_type": "vyos",
-    "host": "192.168.1.16",
-    "username": "vyos",
-    "password": "vyos"
-}
-
 #Check output using ping.py module.
 for ip_addr in range(16,17):
     octet= "192.168.1."
